@@ -1,41 +1,64 @@
-# Compiled Lua sources
-luac.out
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-# luarocks build files
-*.src.rock
-*.zip
-*.tar.gz
 
-# Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
 
-# Precompiled Headers
-*.gch
-*.pch
+function Script()
+    local Window = Library.CreateLib("DeathReaper", "Midnight")
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-*.def
-*.exp
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
 
+
+    -- Script
+
+    MainSection:NewSlider("Walkspeed", "Changes how fast you walk.", 250, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+    MainSection:NewSlider("JumpPower", "Changes how fast you jump.", 250, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+    MainSection:NewButton("SilentAim", "Give you SilentAim script.", function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/DeathReaperForLife/DeathReaperGuiV1/main/Source'),true))()
+    end)
+
+    MainSection:NewToggle("Infinite Jump", "Lets you infinitely jump", function()
+        local InfiniteJumpEnabled = true
+        game:GetService("UserInputService").JumpRequest:connect(function()
+            if InfiniteJumpEnabled then
+                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+            end
+        end)
+    end)
+
+    local Main = Window:NewTab("Hub")
+    local MainSection = Main:NewSection("Hub")
+
+
+    -- Hubs
+
+    HubsSection:NewButton("UniversalFEHub", "UniversalFEHub", function()
+        loadstring(game:HttpGet(('loadstring(game:HttpGet('https://raw.githubusercontent.com/Dvrknvss/UniversalFEScriptHub/main/Script'))()'),true))()
+    end)
+
+    HubsSection:NewButton("Equinox Hub", "Pretty Good To Me", function()
+        loadstring(game:HttpGet(('loadstring(game:Httpget('https://raw.githubusercontent.com/DeathReaperForLife/DeathReaperGuiV1/main/Source1'))()'),true))()
+    end)
+
+
+
+    -- Credits
+
+
+    local Credits = Window:NewTab("Credits")
+    local CreditsSection = Credits:NewSection("Credits")
+
+
+    CreditsSection:NewLabel("Created by DeathReaper")
+    
+
+
+end)
